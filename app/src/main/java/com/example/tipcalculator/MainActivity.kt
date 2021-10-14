@@ -1,5 +1,6 @@
 package com.example.tipcalculator
 
+import android.graphics.Color
 import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
