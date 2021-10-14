@@ -14,10 +14,11 @@
         android:id="@+id/ValentinesBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:visibility="invisible"
-        app:srcCompat="@drawable/valentinesday2"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="104dp" />
+        app:srcCompat="@drawable/valentinesday3"
+        tools:layout_editor_absoluteX="104dp"
+        tools:layout_editor_absoluteY="355dp" />
 
     <ImageView
         android:id="@+id/HalloweenBackground"

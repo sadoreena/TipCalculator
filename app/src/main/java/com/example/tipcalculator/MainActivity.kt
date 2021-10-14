@@ -73,10 +73,17 @@ class MainActivity : AppCompatActivity() {
 
         HalloweenButton.setOnClickListener(View.OnClickListener {
             HalloweenBackground.isVisible = true
+            ValentinesBackground.isVisible = false
         })
 
         ValentinesDayButton.setOnClickListener(View.OnClickListener {
+            HalloweenBackground.isVisible = false
             ValentinesBackground.isVisible = true
+        })
+
+        DefaultButton.setOnClickListener(View.OnClickListener {
+            HalloweenBackground.isVisible = false
+            ValentinesBackground.isVisible = false
         })
 
     }
