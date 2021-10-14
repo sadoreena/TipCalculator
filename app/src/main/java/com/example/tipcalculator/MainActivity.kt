@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
-import android.widget.SeekBar
-import android.widget.TextView
+import android.view.View
+import android.widget.*
+import androidx.core.view.isVisible
 
 private const val TAG = "MainActivity"
 private const val initial_tip_percent = 15
@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTipPercentLabel: TextView
     private lateinit var tvTipAmount: TextView
     private lateinit var tvTotalAmount: TextView
+    private lateinit var DefaultButton: Button
+    private lateinit var ValentinesDayButton: Button
+    private lateinit var HalloweenButton: Button
+    private lateinit var ValentinesBackground: ImageView
+    private lateinit var HalloweenBackground: ImageView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +34,14 @@ class MainActivity : AppCompatActivity() {
         tvTipPercentLabel = findViewById(R.id.tvTipPercentLabel)
         tvTipAmount = findViewById(R.id.tvTipAmount)
         tvTotalAmount = findViewById(R.id.tvTotalAmount)
+
+        DefaultButton = findViewById(R.id.DefaultButton)
+        ValentinesDayButton = findViewById(R.id.ValentinesDayButton)
+        HalloweenButton = findViewById(R.id.HalloweenButton)
+
+        ValentinesBackground = findViewById(R.id.ValentinesBackground)
+        HalloweenBackground = findViewById(R.id.HalloweenBackground)
+
 
         seekBarTip.progress = initial_tip_percent
         tvTipPercentLabel.text = "$initial_tip_percent%"
@@ -56,6 +70,15 @@ class MainActivity : AppCompatActivity() {
 
 
         })
+
+        HalloweenButton.setOnClickListener(View.OnClickListener {
+            HalloweenBackground.isVisible = true
+        })
+
+        ValentinesDayButton.setOnClickListener(View.OnClickListener {
+            ValentinesBackground.isVisible = true
+        })
+
     }
 
     private fun computeTipAndTotal() {
@@ -79,3 +102,4 @@ class MainActivity : AppCompatActivity() {
         tvTotalAmount.text = "\$%.2f".format(totalAmount)
    }
 }
+
