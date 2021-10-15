@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 
 private const val TAG = "MainActivity"
 private const val initial_tip_percent = 15
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var etBaseAmount: EditText
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ValentinesBackground: ImageView
     private lateinit var HalloweenBackground: ImageView
     private lateinit var tvTipDescription: TextView
+    private lateinit var tvSplitBtwn: TextView
+    private lateinit var seekBarSplit: SeekBar
+    private lateinit var tvSplitLabel: TextView
+    private lateinit var tvSplitTotal: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         tvTipAmount = findViewById(R.id.tvTipAmount)
         tvTotalAmount = findViewById(R.id.tvTotalAmount)
         tvTipDescription = findViewById(R.id.tvTipDescription)
+        tvSplitBtwn = findViewById(R.id.tvSplitBtwn)
+        seekBarSplit = findViewById(R.id.seekBarSplit)
+        tvSplitLabel = findViewById(R.id.tvSplitLabel)
+        tvSplitTotal = findViewById(R.id.tvSplitTotal)
 
         DefaultButton = findViewById(R.id.DefaultButton)
         ValentinesDayButton = findViewById(R.id.ValentinesDayButton)
@@ -73,20 +82,33 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        seekBarSplit.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, numPpl: Int, fromUser: Boolean) {
+                tvSplitBtwn.text = (numPpl + 1).toString()
+                computeTipAndTotal()
+            }
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
+        })
+
+
         // changing background after a button is pressed
         HalloweenButton.setOnClickListener(View.OnClickListener {
             HalloweenBackground.isVisible = true
             ValentinesBackground.isVisible = false
+            setTheme(R.style.Theme_TipCalculatorHal)
         })
 
         ValentinesDayButton.setOnClickListener(View.OnClickListener {
             HalloweenBackground.isVisible = false
             ValentinesBackground.isVisible = true
+            setTheme(R.style.Theme_TipCalculatorVal)
         })
 
         DefaultButton.setOnClickListener(View.OnClickListener {
             HalloweenBackground.isVisible = false
             ValentinesBackground.isVisible = false
+            setTheme(R.style.Theme_TipCalculator)
         })
     }
 
@@ -124,11 +146,20 @@ class MainActivity : AppCompatActivity() {
 
         // computer tip and total
         val tipAmount = baseAmount * tipPercent / 100
-        val totalAmount = baseAmount + tipAmount
+        var totalAmount = baseAmount + tipAmount
 
         // update the UI
         tvTipAmount.text =  "\$%.2f".format(tipAmount)
         tvTotalAmount.text = "\$%.2f".format(totalAmount)
+
+
+        if (seekBarSplit.progress > 0) {
+            totalAmount = (totalAmount / (seekBarSplit.progress + 1))
+            tvSplitTotal.text = "\$%.2f".format(totalAmount)
+        }
+        else {
+            tvSplitTotal.text = "\$%.2f".format(totalAmount)
+        }
    }
 }
 
