@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="124dp"
         android:fontFamily="sans-serif-black"
         android:text="Base"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -47,7 +47,7 @@
         android:id="@+id/tvTipLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="sans-serif-black"
         android:text="Tip"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -91,6 +91,7 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:hint="Bill Amount"
         android:inputType="numberDecimal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvBaseLabel"
@@ -111,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/tvTipLabel"
         app:layout_constraintStart_toStartOf="@+id/seekBarTip"
@@ -123,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/tvTotalLabel"
         app:layout_constraintStart_toStartOf="@+id/tvTipAmount"
@@ -156,12 +157,12 @@
 
     <Button
         android:id="@+id/ValentinesDayButton"
-        android:theme="@style/Theme.TipCalculatorVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Valentine's Day"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:theme="@style/Theme.TipCalculatorVal"
         app:layout_constraintBottom_toBottomOf="@+id/DefaultButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/DefaultButton"
@@ -169,15 +170,28 @@
 
     <Button
         android:id="@+id/HalloweenButton"
-        android:theme="@style/Theme.TipCalculatorHal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="Halloween"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:theme="@style/Theme.TipCalculatorHal"
         app:layout_constraintBottom_toBottomOf="@+id/ValentinesDayButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ValentinesDayButton"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvTipDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarTip"
+        app:layout_constraintStart_toStartOf="@+id/seekBarTip"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarTip"
+        tools:text="Acceptable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

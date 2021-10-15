@@ -1,5 +1,6 @@
 package com.example.tipcalculator
 
+import android.animation.ArgbEvaluator
 import android.graphics.Color
 import android.util.Log
 
@@ -9,11 +10,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 
 private const val TAG = "MainActivity"
 private const val initial_tip_percent = 15
 class MainActivity : AppCompatActivity() {
+
     private lateinit var etBaseAmount: EditText
     private lateinit var seekBarTip: SeekBar
     private lateinit var tvTipPercentLabel: TextView
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var HalloweenButton: Button
     private lateinit var ValentinesBackground: ImageView
     private lateinit var HalloweenBackground: ImageView
-
+    private lateinit var tvTipDescription: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         tvTipPercentLabel = findViewById(R.id.tvTipPercentLabel)
         tvTipAmount = findViewById(R.id.tvTipAmount)
         tvTotalAmount = findViewById(R.id.tvTotalAmount)
+        tvTipDescription = findViewById(R.id.tvTipDescription)
 
         DefaultButton = findViewById(R.id.DefaultButton)
         ValentinesDayButton = findViewById(R.id.ValentinesDayButton)
@@ -46,18 +50,17 @@ class MainActivity : AppCompatActivity() {
 
         seekBarTip.progress = initial_tip_percent
         tvTipPercentLabel.text = "$initial_tip_percent%"
+        updateTipDescription(initial_tip_percent)
 
         seekBarTip.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.i(TAG, "onProgressChanged $progress")
                 tvTipPercentLabel.text = "$progress%"
                 computeTipAndTotal()
+                updateTipDescription(progress)
             }
-
             override fun onStartTrackingTouch(p0: SeekBar?) {}
             override fun onStopTrackingTouch(p0: SeekBar?) {}
-
-
         })
 
         etBaseAmount.addTextChangedListener(object: TextWatcher {
@@ -68,10 +71,9 @@ class MainActivity : AppCompatActivity() {
                 Log.i(TAG, "afterTextChanged $s")
                 computeTipAndTotal()
             }
-
-
         })
 
+        // changing background after a button is pressed
         HalloweenButton.setOnClickListener(View.OnClickListener {
             HalloweenBackground.isVisible = true
             ValentinesBackground.isVisible = false
@@ -86,7 +88,26 @@ class MainActivity : AppCompatActivity() {
             HalloweenBackground.isVisible = false
             ValentinesBackground.isVisible = false
         })
+    }
 
+    private fun updateTipDescription(tipPercent: Int) {
+
+        val tipDescription = when(tipPercent) {
+            in 0..9 -> "Poor"
+            in 10..14 -> "Accpetable"
+            in 15..19 -> "Good"
+            in 20..24 -> "Great"
+            else -> "Amazing"
+        }
+        tvTipDescription.text = tipDescription
+
+        // update color based on tip percent
+        val color = ArgbEvaluator().evaluate(
+            tipPercent.toFloat() / seekBarTip.max,
+            ContextCompat.getColor(this, R.color.worst_tip),
+            ContextCompat.getColor(this, R.color.best_tip)
+        ) as Int
+        tvTipDescription.setTextColor(color)
     }
 
     private fun computeTipAndTotal() {
