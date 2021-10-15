@@ -25,7 +25,6 @@ The following **extensions** are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://imgur.com/Lh8VCM1' title='Tip Calculator Walkthrough' width='' alt='Video Walkthrough' />
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="Lh8VCM1" data-context="false" ><a href="//imgur.com/Lh8VCM1"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
